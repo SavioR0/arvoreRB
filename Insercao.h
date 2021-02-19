@@ -1,15 +1,16 @@
 #ifndef _INSERCAO_
-#define _INSERCAO_
+#define _INSERCAO_ 
+#include "Rotacoes.h"
 
 void insertTree(Tree **t, Record r){
   if(*t == NULL){
     *t = (Tree*)malloc(sizeof(Tree));
     (*t)->esq    = NULL; 
     (*t)->dir    = NULL; 
-    (*t)->weight = 0;
+    (*t)->cor = 1;
     (*t)->reg    = r; 
   } else {
-    
+    /*
     if(r.key < (*t)->reg.key){
       insertTree(&(*t)->esq, r);
       if ((getWeight(&(*t)->esq) - getWeight(&(*t)->dir)) == 2){
@@ -33,5 +34,6 @@ void insertTree(Tree **t, Record r){
   }
 
   (*t)->weight = getMaxWeight(getWeight(&(*t)->esq), getWeight(&(*t)->dir)) + 1;
+  */
 }
 #endif

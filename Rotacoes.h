@@ -21,6 +21,7 @@ void rotacaoSimplesDireita(Tree **t){
 	(*t) = aux;
 }
 
+/*
 void rotacaoDuplaDireita(Tree **t){
 	rotacaoSimplesEsquerda(&(*t)->esq);
 	rotacaoSimplesDireita(t);
@@ -30,6 +31,7 @@ void rotacaoDuplaEsquerda(Tree **t){
 	rotacaoSimplesDireita(&(*t)->dir);
 	rotacaoSimplesEsquerda(t);
 }
+*/
 
 
 
