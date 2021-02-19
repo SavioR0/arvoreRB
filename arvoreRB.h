@@ -1,7 +1,6 @@
 #ifndef _ARVORERB_
 #define _ARVORERB
 
-#include "Rotacoes.h"
 typedef struct Record Record;
 typedef struct Tree Tree;
 
@@ -28,6 +27,8 @@ Tree* CreateTree(){
 	return NULL;
 }
 
+
+
 void pesquisa(Tree **t, Tree **aux, Record r){
 
 	if(*t == NULL){
@@ -46,17 +47,11 @@ void showTreeInOrder(Tree *t)
   if(!(t == NULL)){
     showTreeInOrder(t->esq); 
     printf("%d ", t->reg.key);
+	if(t->cor == 1)
+		printf("Vermelho, ");
+	else
+		printf("Preto, ");
     showTreeInOrder(t->dir); 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
+#endif

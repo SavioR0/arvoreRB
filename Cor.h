@@ -1,6 +1,7 @@
 #ifndef _COR_
 #define _COR_
 
+
 int AcessarCor(Tree **t){
     if((*t) == NULL)
         return 0;
@@ -9,10 +10,10 @@ int AcessarCor(Tree **t){
 
 void trocaCor(Tree **t){
     int cor = (*t)->cor;
-    if(cor == 1)
-        (*t)->cor = 0;
-    else
+    if(cor == 0)
         (*t)->cor = 1;
+    else
+        (*t)->cor = 0;
 
     if((*t)->esq)
         (*t)->esq->cor = cor;
