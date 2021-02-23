@@ -7,7 +7,7 @@
 
 
 int main(){
-	int reg[] = {6,4,8,5};
+	int reg[] = {6,4,8,5,9,7};
 	Tree *raiz = CreateTree();
 	Record r;
 	int tam = sizeof(reg)/sizeof(reg[0]);
@@ -17,7 +17,7 @@ int main(){
 		printf(" %d ", reg[i]);
 	printf("\n");
 
-	for(int i=0; i<4; i++){
+	for(int i=0; i<tam; i++){
 		r.key = reg[i];
 		r.value = 1;
 		insertTree(&raiz, r);
@@ -26,7 +26,9 @@ int main(){
 	
 	printf("\n\tORDEM CRESCENTE\n");
 	showTreeInOrder(raiz);
-	printf("\n");
+	printf("\n----------------\n");
+	print2D(raiz);
+	printf("\n--------------------\n");
 
 	printf("Raiz : %d", raiz->reg.key);
 	raiz->cor==1? printf(" (Vermelho) "): printf(" (Preto) ");
@@ -40,7 +42,9 @@ int main(){
 	
 	printf("\n\tAPÓS REMOÇÃO:\n");
 	showTreeInOrder(raiz);
-	printf("\n");
+	printf("\n--------------------\n");
+	print2D(raiz);
+	printf("\n--------------------\n");
 
 	printf("Raiz: %d ",raiz->reg.key);
 	raiz->esq->reg.key? printf("\tEsquerda: %d",raiz->esq->reg.key):printf("\tEsquerda:NULL");

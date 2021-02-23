@@ -4,7 +4,7 @@
 #include "Rotacoes.h"
 
 void rebalanceTree(Tree **t){
-	printf("PAssou aqui\n");
+	//printf("PAssou aqui\n");
 	//nó vermelho é sempre filho à esquerda
 	if(AcessarCor(&(*t)->dir)==1)
 		rotacaoSimplesEsquerda(t);

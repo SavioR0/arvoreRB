@@ -53,4 +53,25 @@ void showTreeInOrder(Tree *t){
     	showTreeInOrder(t->dir); 
 	}
 }
+void print2DUtil(Tree *t, int space) 
+{ 
+    if (t == NULL) 
+        return; 
+
+    space += 10; 
+  
+    print2DUtil(t->dir, space); 
+
+    printf("\n"); 
+    for (int i = 10; i < space; i++) 
+        printf(" "); 
+    printf("%d\n", t->reg.key); 
+
+    print2DUtil(t->esq, space); 
+} 
+  
+void print2D(Tree *root){ 
+   print2DUtil(root, 0); 
+} 
+  
 #endif
