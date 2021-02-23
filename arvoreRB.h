@@ -42,16 +42,15 @@ void pesquisa(Tree **t, Tree **aux, Record r){
 	*aux = *t;
 }
 
-void showTreeInOrder(Tree *t)
-{
-  if(!(t == NULL)){
-    showTreeInOrder(t->esq); 
-    printf("%d ", t->reg.key);
-	if(t->cor == 1)
-		printf("Vermelho, ");
-	else
-		printf("Preto, ");
-    showTreeInOrder(t->dir); 
-  }
+void showTreeInOrder(Tree *t){
+	if(t != NULL){
+    	showTreeInOrder(t->esq); 
+    	printf("%d ", t->reg.key);
+		if(t->cor == 1)
+			printf("Vermelho ");
+		else
+			printf("Preto ");
+    	showTreeInOrder(t->dir); 
+	}
 }
 #endif
