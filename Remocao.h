@@ -3,7 +3,7 @@
 #include "Cor.h"
 #include "Rotacoes.h"
 
-void rebalanceTree(Tree **t){
+Tree *rebalanceTree(Tree **t){
 	//printf("PAssou aqui\n");
 	//nó vermelho é sempre filho à esquerda
 	if(AcessarCor(&(*t)->dir)==1)
@@ -14,33 +14,37 @@ void rebalanceTree(Tree **t){
 	//2 Filhos Vermelhos
 	if(AcessarCor(&(*t)->esq)== 1 && AcessarCor(&(*t)->dir)== 1)
 		trocaCor(t);
+	
+	return *t;
 }
-void mover2EsqRED(Tree **t){
+Tree *mover2EsqRED(Tree **t){
     trocaCor(t);
 	if(AcessarCor(&(*t)->dir->esq) == 1){
 		rotacaoSimplesDireita(&(*t)->dir);
 		rotacaoSimplesEsquerda(t);
 		trocaCor(t);
 	}
+	return *t;
 }
-void mover2DirRED(Tree **t){
+Tree *mover2DirRED(Tree **t){
     trocaCor(t);
 	if(AcessarCor(&(*t)->esq->esq) == 1){
 		rotacaoSimplesDireita(t);
 		trocaCor(t);
 	}
+	return *t;
 }
 
-void removerMenor(Tree **t){
+Tree *removerMenor(Tree **t){
 	if((*t)->esq == NULL){
 		free(t);
-		return;
+		return NULL;
 	}
 	if(AcessarCor(&(*t)->esq) == 0 && AcessarCor(&(*t)->esq->esq) == 0)
 		mover2EsqRED(t);
 
-	removerMenor(&(*t)->esq);
-	rebalanceTree(t);
+	*t = removerMenor(&(*t)->esq);
+	return rebalanceTree(t);
 }
 //Procura o nó mais á esquerda
 Tree *procurarMenor(Tree **t){
@@ -53,42 +57,47 @@ Tree *procurarMenor(Tree **t){
 	return no1;
 }
 
-void remover(Tree **t, Record r){
+Tree *remover(Tree **t,Tree *pai, Record r){	
 	if(r.key < (*t)->reg.key){
 		if(AcessarCor(&(*t)->esq) == 0 && AcessarCor(&(*t)->esq->esq)== 0)
 			mover2EsqRED(t);
-		remover(&(*t)->esq,r);
+		remover(&(*t)->esq,pai,r);
 	}else{
 		if(AcessarCor(&(*t)->esq) == 1)
 			rotacaoSimplesDireita(t);
 	
 		if(r.key == (*t)->reg.key && ((*t)->dir == NULL)){
-			free(*t);
-			return;
+			
+			if(pai->dir == NULL && pai->esq->esq != NULL  && (*t)->reg.key !=11){
+				printf("remove");
+				free(*t);
+				pai->esq = pai->esq->esq;
+			}
+			return NULL;
 		} 
+
 		if(AcessarCor(&(*t)->dir) == 0 && AcessarCor(&(*t)->dir->esq) == 0){
 			mover2DirRED(t);
 		}
 		if(r.key == (*t)->reg.key){
 			Tree *aux = procurarMenor(&(*t)->dir);
 			(*t)->reg.key = aux->reg.key;
-			removerMenor(&(*t)->dir);
+			(*t)->dir = removerMenor(&(*t)->dir);
 		}else{
-			remover(&(*t)->dir, r);
-			printf("PAssou aqui\n");
+			remover(&(*t)->dir, pai,r);
 		}
 	}
-	rebalanceTree(t);
+	return rebalanceTree(t);
 }
 
 
 void removeTree(Tree **t, Tree **f, Record r){
-	Tree *aux;
+	Tree *pai ;
   	if (*t == NULL){ 
   		printf("[ERROR]: Record not found!!!\n");
     	return;
   	}
-
+	printf("%d\n", (*t)->reg.key);
   	if (r.key < (*t)->reg.key){ 
 		removeTree(&(*t)->esq, t, r); 
 		return;
@@ -97,8 +106,9 @@ void removeTree(Tree **t, Tree **f, Record r){
 		removeTree(&(*t)->dir, t, r); 
 		return;
 	}
+	pai = *f;
 	//Tree *h = *t;
-	remover(&(*t),r);
+	*t = remover(&(*t),pai,r);
   	
 }
 

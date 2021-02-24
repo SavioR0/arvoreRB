@@ -53,8 +53,7 @@ void showTreeInOrder(Tree *t){
     	showTreeInOrder(t->dir); 
 	}
 }
-void print2DUtil(Tree *t, int space) 
-{ 
+void print2DUtil(Tree *t, int space){ 
     if (t == NULL) 
         return; 
 

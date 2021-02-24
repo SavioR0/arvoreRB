@@ -17,7 +17,7 @@ void rotacaoSimplesDireita(Tree **t){
 	(*t)->esq = aux->dir;
 	aux->dir = (*t);
 	aux->cor = (*t)->cor;
-	(*t)->cor = 1;
+	//(*t)->cor = 1;
 	(*t) = aux;
 }
 
