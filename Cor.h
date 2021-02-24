@@ -3,8 +3,9 @@
 
 
 int AcessarCor(Tree **t){
-    if((*t) == NULL)
+    if((*t) == NULL){
         return 0;
+    }
     return (*t)->cor;
 }
 
